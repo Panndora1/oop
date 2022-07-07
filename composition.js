@@ -1,7 +1,7 @@
 class Tu154 {
     isFly = false
 
-    constructor(name = 'ТУ-154', maxSpeed = '850 км/ч') {
+    constructor(name = 'Aircraft', maxSpeed = '850 км/ч') {
         this.name = name
         this.maxSpeed = maxSpeed
     }
@@ -9,12 +9,12 @@ class Tu154 {
     
     takeoff() {
         this.isFly = true
-        console.log('Aircraft in the air')
+        console.log(`${this.name} in the air`)
     }
 
     landing() {
         this.isFly = false
-        console.log('Aircraft has landed')
+        console.log(`${this.name} has landed`)
     }
 
     get status() {
@@ -23,6 +23,7 @@ class Tu154 {
 }
 
 class Mig extends Tu154 {
+    isFly = true
 
     attack() {
         if(this.isFly === true) {
@@ -40,8 +41,8 @@ class Airport {
     isRenovation = false
 
     constructor() {
-        this.tu154 = new Tu154()
-        this.mig = new Mig()
+        this.tu154 = new Tu154('TU 154')
+        this.mig = new Mig('MIG')
     }
 
     takeAircraft() {
@@ -55,16 +56,24 @@ class Airport {
     aircraftClearedSeatAndTookOff() {
         if(this.isRenovation === false) {
             this.isFreeSeat = true
-            this.tu154.takeoff()
-            this.mig.takeoff()
 
+            if(this.tu154.status === false) {
+                this.tu154.takeoff()
+            } else {
+                this.mig.takeoff()
+            }
+            
+            console.log('Aircraft takeoff')
         }
     }
 
     aircraftInParking() {
         this.isFreeSeat = false
-        this.tu154.landing() 
-        this.mig.landing()
+        if(this.tu154.status === true) {
+            this.tu154.landing() 
+        } else {
+            this.mig.landing()
+        }        
         console.log('Aircraft was parked')
     }
 
@@ -89,3 +98,5 @@ class Airport {
 }
 
 const aeropot = new Airport()
+aeropot.aircraftClearedSeatAndTookOff()
+aeropot.aircraftInParking()
