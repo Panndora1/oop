@@ -41,9 +41,9 @@ class Airport {
     isRenovation = false
     whatAircraftTakeoff = null
 
-    constructor() {
-        this.tu154 = new Tu154('TU 154') //При композиции объекты передаваемых классов создаются в конструкторе принимаемого класса
-        this.mig = new Mig('MIG')        //Таким образом при удалении аэропорта удалятся и самолеты
+    constructor() { 
+        this.tu154 = null   
+        this.mig = null
     }
 
     takeAircraft() { //Принять самолет
@@ -108,4 +108,12 @@ class Airport {
     }
 }
 
+const mig = new Mig('МИГ')
+const tu154 = new Tu154('ТУ-154')
+
 const airport = new Airport() 
+airport.tu154 = tu154
+airport.mig = mig
+
+airport.aircraftInParking()
+airport.aircraftClearedSeatAndTookOff()
