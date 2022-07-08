@@ -114,6 +114,3 @@ const tu154 = new Tu154('ТУ-154')
 const airport = new Airport() 
 airport.tu154 = tu154
 airport.mig = mig
-
-airport.aircraftInParking()
-airport.aircraftClearedSeatAndTookOff()
